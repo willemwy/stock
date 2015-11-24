@@ -1,0 +1,20 @@
+alias ll="ls -la --color=auto"
+
+alias play="boot2docker"
+alias work="boot2docker"
+alias dc="docker-compose"
+alias dcr="docker-compose run --rm"
+alias dcrm="docker-compose rm -f"
+alias dcu="docker-compose up -d"
+alias dcrp="docker-compose run --rm -d --service-ports"
+alias dckill="docker-compose kill && dcrm"
+
+alias ag="cd ~/dev/aang/demo-console/yii/ordercloud"
+alias op="cd ~/dev/ordercloud-php"
+alias opm="cd ~/dev/ordercloud-php-monolog"
+alias go="cd ~/dev/gopher"
+alias sb="cd ~/dev/stormborn"
+alias ca="cd ~/dev/cart"
+alias da="cd ~/dev/damascus"
+
+alias learn="cd ~/dev/pp/learn"
