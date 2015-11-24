@@ -5,7 +5,7 @@
 data:
   build: data
   volumes:
-    - /home/test/stock/:/data:rw
+    - /home/ubuntu/stock/:/data:rw
 
 mysql:
   build: mysql
@@ -18,4 +18,4 @@ phpfpm:
   stdin_open: true
   tty: true
   volumes:
-    - /home/test/stock/.docker/phpfpm/php.ini:/usr/local/etc/php/php.ini
+    - /home/ubuntu/stock/.docker/phpfpm/php.ini:/usr/local/etc/php/php.ini
