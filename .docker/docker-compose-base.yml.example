@@ -1,0 +1,17 @@
+# Just replace the volume references with your own
+
+# NOTE: relative paths will not work when using boot2docker
+
+data:
+  build: data
+  volumes:
+    - ./framework:/data/framework:rw
+    - ./ordercloud:/data/www:rw
+
+phpfpm:
+  build: phpfpm
+  command: php-fpm --allow-to-run-as-root --fpm-config /data/www/.docker/phpfpm/fpm.conf
+  stdin_open: true
+  tty: true
+  volumes:
+    - ./ordercloud/.docker/phpfpm/php.ini:/usr/local/etc/php/php.ini

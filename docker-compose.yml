@@ -1,0 +1,62 @@
+data:
+  extends:
+    file: .docker/docker-compose-base.yml
+    service: data
+
+redis:
+  image: redis
+#  command: redis-server /data/www/.docker/redis/redis.conf
+#  volumes_from:
+#    - data
+
+phpfpm:
+  extends:
+    file: .docker/docker-compose-base.yml
+    service: phpfpm
+  links:
+   - redis
+   - mysql
+  volumes_from:
+    - data
+
+web:
+  image: nginx:1.9.0
+  command: nginx -c /data/.docker/nginx/nginx.conf
+  links:
+    - phpfpm
+  volumes_from:
+    - data
+  environment:
+    - VIRTUAL_HOST=clinic.stock
+
+php:
+  build: .docker/phpfpm
+  entrypoint: ["php"]
+  command: ["-v"]
+  volumes_from:
+    - data
+  links: ["mysql"]
+
+bash:
+  build: .docker/phpfpm
+  entrypoint: ["bash"]
+  volumes_from:
+    - data
+
+composer:
+  build: .docker/phpfpm
+  entrypoint: ["/usr/bin/composer"]
+  command: ["-v"]
+  volumes_from:
+    - data
+mysql:
+  volumes_from:
+    - data
+  image: mysql:5.7
+  ports:
+      - "3306:3306"
+  environment:
+     - MYSQL_ROOT_PASSWORD=verysecret
+     - MYSQL_USER=rootuser
+     - MYSQL_PASSWORD=password
+     - VIRTUAL_HOST=mysql

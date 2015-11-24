@@ -1,0 +1,21 @@
+# Just replace the volume references with your own
+
+# NOTE: relative paths will not work when using boot2docker
+
+data:
+  build: data
+  volumes:
+    - /home/test/stock/:/data:rw
+
+mysql:
+  build: mysql
+  volumes:
+    - /data/.docker/mysql/data:/var/lib/mysql
+
+phpfpm:
+  build: phpfpm
+  command: php-fpm --allow-to-run-as-root --fpm-config /data/.docker/phpfpm/fpm.conf
+  stdin_open: true
+  tty: true
+  volumes:
+    - /home/test/stock/.docker/phpfpm/php.ini:/usr/local/etc/php/php.ini
