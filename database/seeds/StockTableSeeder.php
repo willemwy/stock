@@ -21,8 +21,8 @@ class StockTableSeeder extends DatabaseSeeder
             {
                 DB::table('stock')->insert(
                     [
-                        'fk_clinic_id' => $clinicId,
-                        'fk_medication_id' => $medicationId,
+                        'fk_clinic' => $clinicId,
+                        'fk_medication' => $medicationId,
                         'level' => random_int(0,20)
                     ]
                 );
